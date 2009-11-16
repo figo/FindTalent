@@ -4,6 +4,8 @@ from django.conf.urls.defaults import *
 # from django.contrib import admin
 # admin.autodiscover()
 
+from django.conf import settings
+
 urlpatterns = patterns('',
   # Example:
   # ( r'^FindTalent/', include( 'FindTalent.foo.urls' ) ),
@@ -14,9 +16,10 @@ urlpatterns = patterns('',
 
   # Uncomment the next line to enable the admin:
   # ( r'^admin/', include( admin.site.urls ) ),
+  ( r'^static/(?P<path>.*)$', 'django.views.static.serve', { 'document_root' : settings.STATIC_DOC_ROOT } ),
 )
 
-urlpatterns += patterns( '',
-  ( r'^$', 'account.views.login' ),
-  ( r'^account/login/$', 'account.views.login' ),
+urlpatterns += patterns( 'account',
+  ( r'^$', 'views.login' ),
+  ( r'^account/login/$', 'views.login' ),
 )
