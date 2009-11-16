@@ -5,13 +5,18 @@ from django.conf.urls.defaults import *
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^FindTalent/', include('FindTalent.foo.urls')),
+  # Example:
+  # ( r'^FindTalent/', include( 'FindTalent.foo.urls' ) ),
 
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-    # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+  # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
+  # to INSTALLED_APPS to enable admin documentation:
+  # ( r'^admin/doc/', include('django.contrib.admindocs.urls' ) ),
 
-    # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+  # Uncomment the next line to enable the admin:
+  # ( r'^admin/', include( admin.site.urls ) ),
+)
+
+urlpatterns += patterns( '',
+  ( r'^$', 'account.views.login' ),
+  ( r'^account/login/$', 'account.views.login' ),
 )

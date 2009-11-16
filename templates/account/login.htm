@@ -1,0 +1,12 @@
+{% extends "base.htm" %}
+{% block content %}
+
+<form action="/account/add/" method="post">
+  <table>
+    <tr><td>User Name</td><td><input type="text" id="name" name="name" maxlength="30"/></td></tr>
+    <tr><td>Password</td><td><input type="password" value="" id="pass", name="pass"/></td></tr>
+  </table>
+  <input type="submit" value="Login" id="submit" name="submit"/>
+</form>
+
+{% endblock %}
