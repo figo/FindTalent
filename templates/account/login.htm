@@ -1,12 +1,33 @@
 {% extends "base.htm" %}
+
+{% block head_css %}
+  #tabs  { margin: 0 auto; width: 350px; text-align: center; }
+  #login { margin-top: 10px; width: 250px; }
+{% endblock %}
+
+{% block head_javascript %}
+$(function(){
+  $( '#tabs' ).tabs();
+});
+{% endblock %}
+
 {% block content %}
-
-<form action="/account/add/" method="post">
-  <table>
-    <tr><td>User Name</td><td><input type="text" id="name" name="name" maxlength="30"/></td></tr>
-    <tr><td>Password</td><td><input type="password" value="" id="pass", name="pass"/></td></tr>
-  </table>
-  <input type="submit" value="Login" id="submit" name="submit"/>
-</form>
-
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-sign-in">Sign In</a></li>
+    <li><a href="#tabs-sign-up">Sign Up</a></li>
+  </ul>
+  <div id="tabs-sign-in">
+    <form action="/account/sign_in/" method="post">
+      <table>
+        <tr><td>Username</td><td><input type="text" id="name" name="name" maxlength="30"/></td></tr>
+        <tr><td>Password</td><td><input type="password" value="" id="pass", name="pass"/></td></tr>
+      </table>
+      <input type="submit" value="Login" id="login" name="login"/>
+    </form>
+  </div>
+  <div id="tabs-sign-up">
+    TODO Register Form
+  </div>
+</div>
 {% endblock %}
