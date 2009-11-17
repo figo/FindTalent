@@ -1,0 +1,31 @@
+{% extends "base.htm" %}
+
+{% block head_css %}
+  h1 { font-size: 24px; }
+  #container { text-align: center; padding: 0; margin: 0; }
+  #container div { margin: 0 auto; text-align: left; width: 600px; }
+
+  #personal_info { position: relative; border: 1px solid; }
+  #personal_info p { margin-left: 15px; }
+  #personal_info img { position:absolute; top: 15px; right: 15px; }
+{% endblock %}
+
+{% block head_javascript %}
+$(function(){
+});
+{% endblock %}
+
+{% block content %}
+{% include "header.htm" %}
+<div id="container">
+<h1>Live Bio - Tian You</h1>
+
+<div id="personal_info" class="ui-widget ui-corner-all">
+<p>Tian You <a href="#">edit</a></p>
+<p>Associated Software Engineer <a href="#">edit</a></p>
+<p>SAVFL Team <a href="#">edit</a></p>
+<img src="/static/ninjia.png" alt="Tian You" name="Tian You"/>
+</div><!-- personal_info -->
+
+</div><!-- container -->
+{% endblock %}

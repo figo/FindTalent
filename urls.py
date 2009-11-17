@@ -23,3 +23,7 @@ urlpatterns += patterns( 'account',
   ( r'^$', 'views.login' ),
   ( r'^account/login/$', 'views.login' ),
 )
+
+urlpatterns += patterns( 'show',
+  ( r'^show/$', 'views.show' ),
+)
