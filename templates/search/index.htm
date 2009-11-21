@@ -1,0 +1,87 @@
+{% extends "base.htm" %}
+
+{% block head_css %}
+  #container { margin: 0 auto; text-align: center; font-size: 12px; }
+  form { margin: 15px auto; text-align: left; padding: 15px; width: 80%; border: 1px solid; }
+  h1 { font-size: 14px; }
+  table { margin: 0 auto; border: 2px solid; width: 100%; border-collapse: collapse; }
+  table th, table td { border: 1px solid; }
+  #search-type { width: 100%; }
+  #search-box { padding-top: 5px; }
+  #search-key { width: 50%; }
+{% endblock %}
+
+{% block head_javascript %}
+function adjust_search_box()
+{
+  if( $( '#search-type' ).val() == "pending" )
+  {
+    $( '#search-box' ).hide();
+  }
+  else
+  {
+    $( '#search-box' ).show();
+  }
+}
+
+$(function(){
+  adjust_search_box();
+  $( '#search-type' ).bind( 'change', adjust_search_box );
+});
+{% endblock %}
+
+{% block content %}
+{% include "header.htm" %}
+<div id="container">
+<form action="#" method="post">
+  <select id="search-type" name="search-type">
+    <option value="pending" selected="selected">Choose a Search Type...</option>
+    <option value="skill">Search Type: Skill</option>
+    <option value="project">Search Type: Project Experience</option>
+    <option value="certification">Search Type: Certification</option>
+  </select>
+  <div id="search-box">
+    <input type="text" id="search-key" name="search-key" maxlength="30"/>
+    <input type="submit" value="Search" id="search-btn" name="search-btn"/>
+    <input type="checkbox" id="search-in-result" name="search-in-result"/>Search in the current result
+  </div><!-- search-box -->
+</form>
+
+<h1>Total qualified: 3</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Title</th>
+    <th>Team</th>
+    <th>Skill Count</th>
+    <th>Experience Count</th>
+    <th>Certification Count</th>
+  </tr>
+  <tr>
+    <td>Tian You</td>
+    <td>Associate Software Engineer</td>
+    <td>SAVFL</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Foo Bar</td>
+    <td>Associate Software Engineer</td>
+    <td>SAVFL</td>
+    <td>2</td>
+    <td>2</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Bar Foo</td>
+    <td>Software Engineer</td>
+    <td>SAVFL</td>
+    <td>10</td>
+    <td>13</td>
+    <td>7</td>
+  </tr>
+</table>
+</div><!-- container -->
+{% endblock %}

@@ -27,3 +27,7 @@ urlpatterns += patterns( 'account',
 urlpatterns += patterns( 'show',
   ( r'^show/$', 'views.show' ),
 )
+
+urlpatterns += patterns( 'search',
+  ( r'^search/$', 'views.search' ),
+)
