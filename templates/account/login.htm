@@ -1,13 +1,48 @@
 {% extends "base.htm" %}
 
 {% block head_css %}
-  #tabs  { margin: 0 auto; width: 350px; text-align: center; }
-  #login { margin-top: 10px; width: 250px; }
+  p { padding: 0; margin: 5px; }
+  form table { text-align: left; }
+  table { margin: 5px auto; }
+  #tabs { margin: 0 auto; width: 400px; text-align: center; }
+  #login-btn { margin-top: 10px; width: 250px; }
+  #reg-btn { margin-top: 10px; width: 250px; }
+  #sign-up-alert { padding: 0 5px; }
+  #sign-up-alert p span { float: left; }
+  #reg-avatar-btn { padding: 5px 25px; font-size: 12px; text-decoration: none; position: relative; }
+  #reg-avatar-btn span { position: absolute; left: 0; top: 5px; }
 {% endblock %}
 
 {% block head_javascript %}
 $(function(){
+  $( '#shadow' ).hide();
+
   $( '#tabs' ).tabs();
+
+  $( '#upload-image' ).dialog( {
+    autoOpen: false,
+    width: 600,
+    buttons: {
+      'Upload' : function() {
+        $( '#shadow' ).hide();
+        $( this ).dialog( 'close' );
+      },
+      'Cancel' : function() {
+        $( '#shadow' ).hide();
+        $( this ).dialog( 'close' );
+      }
+    }
+  } );
+
+  $( '#reg-avatar-btn' ).click( function() {
+    $( '#shadow' ).show();
+    $( '#upload-image' ).dialog( 'open' );
+  } );
+
+  $( '#reg-avatar-btn' ).hover(
+    function() { $( this ).addClass( 'ui-state-hover' ); },
+    function() { $( this ).removeClass( 'ui-state-hover' ); }
+  );
 });
 {% endblock %}
 
@@ -23,11 +58,49 @@ $(function(){
         <tr><td>Username</td><td><input type="text" id="name" name="name" maxlength="30"/></td></tr>
         <tr><td>Password</td><td><input type="password" value="" id="pass", name="pass"/></td></tr>
       </table>
-      <input type="submit" value="Login" id="login" name="login"/>
+      <input type="submit" value="Login" id="login-btn" name="login-btn"/>
     </form>
   </div>
   <div id="tabs-sign-up">
-    TODO Register Form
+    <form action="/account/sign_up/" method="post">
+      <div id="sign-up-alert" class="ui-state-error ui-corner-all">
+        <p><span class="ui-icon ui-icon-alert"></span>blahblahblah...</p>
+      </div>
+      <table>
+        <tr>
+          <td>Username</td>
+          <td><input type="text" id="reg-name" name="reg-name" maxlength="30"/></td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td><input type="text" id="reg-pass" name="reg-pass"/></td>
+        </tr>
+        <tr>
+          <td>Re-Password</td>
+          <td><input type="text" id="reg-pass-again" name="reg-pass-again"/></td>
+        </tr>
+        <tr>
+          <td>Title</td>
+          <td><input type="text" id="reg-title" name="reg-title"/></td>
+        </tr>
+        <tr>
+          <td>Team</td>
+          <td><input type="text" id="reg-team" name="reg-team"/></td>
+        </tr>
+        <tr>
+          <td>Avatar</td>
+          <td><p><a href="#" id="reg-avatar-btn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Upload from my computer...</a></p></td>
+        </tr>
+      </table>
+      <input type="submit" value="Register" id="reg-btn" name="reg-btn"/>
+    </form>
   </div>
+</div>
+
+<div id="shadow" class="ui-widget-overlay"></div>
+
+<div id="upload-image" title="Uploading avatar...">
+<p>Please choose your avatar:</p>
+<input type="file" accept="image/*"/>
 </div>
 {% endblock %}
