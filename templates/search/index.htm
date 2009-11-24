@@ -4,8 +4,10 @@
   #container { margin: 0 auto; text-align: center; font-size: 12px; }
   form { margin: 15px auto; text-align: left; padding: 15px; width: 80%; border: 1px solid; }
   h1 { font-size: 14px; }
+  h1 span { color: red; }
   table { margin: 0 auto; border: 2px solid; width: 100%; border-collapse: collapse; }
-  table th, table td { border: 1px solid; }
+  table th { background: #F6A828; font-weight: bold; color: white; }
+  table th, table td { border: 1px solid white; }
   #search-type { width: 100%; }
   #search-box { padding-top: 5px; }
   #search-key { width: 50%; }
@@ -47,9 +49,9 @@ $(function(){
   </div><!-- search-box -->
 </form>
 
-<h1>Total qualified: 3</h1>
+<h1>Total qualified: <span>3</span></h1>
 
-<table>
+<table class="ui-state-default">
   <tr>
     <th>Name</th>
     <th>Title</th>
