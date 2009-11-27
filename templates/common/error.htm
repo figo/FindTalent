@@ -1,0 +1,18 @@
+{% extends "base.htm" %}
+
+{% block head_css %}
+  #msg { width: 500px; margin: 0 auto; padding: 10px; }
+  h1 { color: red; }
+{% endblock %}
+
+{% block head_javascript %}
+$(function(){
+});
+{% endblock %}
+
+{% block content %}
+<div id="msg" class="ui-state-default ui-corner-all">
+  <h1>Error</h1>
+  <p>{% if msg %}{{ msg }}{% else %}Unknown error...{% endif %}</p>
+</div>
+{% endblock %}
