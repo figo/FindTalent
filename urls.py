@@ -20,8 +20,10 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns( 'account',
-  ( r'^$', 'views.login' ),
-  ( r'^account/login/$', 'views.login' ),
+  ( r'^$',                  'views.login'  ),
+  ( r'^account/login/$',    'views.login'  ),
+  ( r'^account/sign_in/$',  'views.signin' ),
+  ( r'^account/sign_up/$',  'views.signup' ),
 )
 
 urlpatterns += patterns( 'show',
