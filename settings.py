@@ -80,11 +80,10 @@ TEMPLATE_DIRS = (
 
 STATIC_DOC_ROOT = base_dir + '/static'
 
-
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-#   'django.contrib.sites',
-    'FindTalent.account',
+# 'django.contrib.auth',
+# 'django.contrib.contenttypes',
+# 'django.contrib.sites',
+  'django.contrib.sessions',
+  'FindTalent.account',
 )
