@@ -80,6 +80,8 @@ TEMPLATE_DIRS = (
 
 STATIC_DOC_ROOT = base_dir + '/static'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 INSTALLED_APPS = (
 # 'django.contrib.auth',
 # 'django.contrib.contenttypes',
