@@ -12,6 +12,11 @@
 {% endblock %}
 
 {% block head_javascript %}
+function show_error_msg( alertbox, msg )
+{
+  alertbox.html( '<p><span class="ui-icon ui-icon-alert"></span>' + msg + '</p>' ).show();
+}
+
 $(function(){
   $( '#shadow, #sign-up-alert, #sign-in-alert' ).hide();
 
@@ -38,6 +43,14 @@ $(function(){
   );
 
   $( '#login-btn' ).click( function() {
+    alertbox = $( '#sign-in-alert' );
+    if( $( '#name' ).val() == '' || $( '#pass' ).val() == '' )
+    {
+      show_error_msg( alertbox, 'Username and password cannot be empty' );
+      return;
+    }
+
+    alertbox.hide();
     $( '#login-form' ).submit();
   } );
 
@@ -47,6 +60,20 @@ $(function(){
   } );
 
   $( '#reg-btn' ).click( function() {
+    alertbox = $( '#sign-up-alert' );
+    if(  $( '#reg-name' ).val() == '' || $( '#reg-pass' ).val() == ''
+      || $( '#reg-title' ).val() == '' || $( '#reg-team' ).val() == '' )
+    {
+      ehow_error_msg( alertbox, 'All fields are required' );
+      return;
+    }
+    if( $( '#reg-pass' ).val() != $( '#reg-pass-again' ).val() )
+    {
+      show_error_msg( alertbox, 'Passwords are NOT identical' );
+      return;
+    }
+
+    alertbox.hide();
     $( '#reg-form' ).submit();
   } );
 });
