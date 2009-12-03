@@ -5,12 +5,10 @@
   form table { text-align: left; }
   table { margin: 5px auto; }
   #tabs { margin: 30px auto; width: 400px; text-align: center; }
-  #login-btn { margin-top: 10px; width: 250px; }
-  #reg-btn { margin-top: 10px; width: 250px; }
   #sign-up-alert { padding: 0 5px; }
   #sign-up-alert p span { float: left; }
-  #reg-avatar-btn { padding: 5px 25px; font-size: 12px; text-decoration: none; position: relative; }
-  #reg-avatar-btn span { position: absolute; left: 0; top: 5px; }
+  #login-btn, #reg-avatar-btn, #reg-btn { padding: 5px 25px; font-size: 12px; text-decoration: none; position: relative; }
+  #login-btn span, #reg-avatar-btn span, #reg-btn span { position: absolute; left: 5px; top: 5px; }
 {% endblock %}
 
 {% block head_javascript %}
@@ -34,15 +32,23 @@ $(function(){
     }
   } );
 
+  $( '#login-btn, #reg-btn, #reg-avatar-btn' ).hover(
+    function() { $( this ).addClass( 'ui-state-hover' ); },
+    function() { $( this ).removeClass( 'ui-state-hover' ); }
+  );
+
+  $( '#login-btn' ).click( function() {
+    $( '#login-form' ).submit();
+  } );
+
   $( '#reg-avatar-btn' ).click( function() {
     $( '#shadow' ).show();
     $( '#upload-image' ).dialog( 'open' );
   } );
 
-  $( '#reg-avatar-btn' ).hover(
-    function() { $( this ).addClass( 'ui-state-hover' ); },
-    function() { $( this ).removeClass( 'ui-state-hover' ); }
-  );
+  $( '#reg-btn' ).click( function() {
+    $( '#reg-form' ).submit();
+  } );
 });
 {% endblock %}
 
@@ -53,16 +59,16 @@ $(function(){
     <li><a href="#tabs-sign-up">Sign Up</a></li>
   </ul>
   <div id="tabs-sign-in">
-    <form action="/account/sign_in/" method="post">
+    <form id="login-form" action="/account/sign_in/" method="post">
       <table>
         <tr><td>Username</td><td><input type="text" id="name" name="name" maxlength="30"/></td></tr>
         <tr><td>Password</td><td><input type="password" value="" id="pass", name="pass"/></td></tr>
       </table>
-      <input type="submit" value="Login" id="login-btn" name="login-btn"/>
+      <p><a href="#" id="login-btn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-key"></span>Login</a></p>
     </form>
   </div>
   <div id="tabs-sign-up">
-    <form action="/account/sign_up/" method="post">
+    <form id="reg-form" action="/account/sign_up/" method="post">
       <div id="sign-up-alert" class="ui-state-error ui-corner-all">
         <p><span class="ui-icon ui-icon-alert"></span>blahblahblah...</p>
       </div>
@@ -92,7 +98,7 @@ $(function(){
           <td><p><a href="#" id="reg-avatar-btn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Upload from my computer...</a></p></td>
         </tr>
       </table>
-      <input type="submit" value="Register" id="reg-btn" name="reg-btn"/>
+      <p><a href="#" id="reg-btn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-pencil"></span>Register</a></p>
     </form>
   </div>
 </div>
