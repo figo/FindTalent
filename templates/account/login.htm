@@ -64,7 +64,7 @@ $(function(){
     if(  $( '#reg-name' ).val() == '' || $( '#reg-pass' ).val() == ''
       || $( '#reg-title' ).val() == '' || $( '#reg-team' ).val() == '' )
     {
-      ehow_error_msg( alertbox, 'All fields are required' );
+      show_error_msg( alertbox, 'All fields are required' );
       return;
     }
     if( $( '#reg-pass' ).val() != $( '#reg-pass-again' ).val() )
