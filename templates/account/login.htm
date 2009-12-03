@@ -5,15 +5,15 @@
   form table { text-align: left; }
   table { margin: 5px auto; }
   #tabs { margin: 30px auto; width: 400px; text-align: center; }
-  #sign-up-alert { padding: 0 5px; }
-  #sign-up-alert p span { float: left; }
+  #sign-up-alert, #sign-in-alert { padding: 0 5px; }
+  #sign-up-alert p span, #sign-in-alert p span { float: left; }
   #login-btn, #reg-avatar-btn, #reg-btn { padding: 5px 25px; font-size: 12px; text-decoration: none; position: relative; }
   #login-btn span, #reg-avatar-btn span, #reg-btn span { position: absolute; left: 5px; top: 5px; }
 {% endblock %}
 
 {% block head_javascript %}
 $(function(){
-  $( '#shadow' ).hide();
+  $( '#shadow, #sign-up-alert, #sign-in-alert' ).hide();
 
   $( '#tabs' ).tabs();
 
@@ -60,6 +60,7 @@ $(function(){
   </ul>
   <div id="tabs-sign-in">
     <form id="login-form" action="/account/sign_in/" method="post">
+      <div id="sign-in-alert" class="ui-state-error ui-corner-all"></div>
       <table>
         <tr><td>Username</td><td><input type="text" id="name" name="name" maxlength="30"/></td></tr>
         <tr><td>Password</td><td><input type="password" value="" id="pass", name="pass"/></td></tr>
@@ -69,9 +70,7 @@ $(function(){
   </div>
   <div id="tabs-sign-up">
     <form id="reg-form" action="/account/sign_up/" method="post">
-      <div id="sign-up-alert" class="ui-state-error ui-corner-all">
-        <p><span class="ui-icon ui-icon-alert"></span>blahblahblah...</p>
-      </div>
+      <div id="sign-up-alert" class="ui-state-error ui-corner-all"></div>
       <table>
         <tr>
           <td>Username</td>
