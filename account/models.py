@@ -24,6 +24,7 @@ class GroupManager:
   def add_user_to_group( user, group ):
     TalentGroup( username = user, groupname = group ).save()
 
+  @staticmethod
   def del_user_from_group( user, group ):
     TalentGroup.objects.filter( \
       username__exact  = user, \
