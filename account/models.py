@@ -11,3 +11,10 @@ class TalentUser( models.Model ):
 
   def __unicode__( self ):
     return '[Username: %s, Password: %s, Title: %s, Team: %s, Pics: %s]' % ( self.username, self.password, self.title, self.team, self.picture )
+
+class TalentGroup( models.Model ):
+  username  = models.CharField( max_length = 20 )
+  groupname = models.CharField( max_length = 50 )
+
+  def __unicode__( self ):
+    return '[Username: %s, Groupname: %s]' % ( self.username, self.groupname )

@@ -1,4 +1,6 @@
 from FindTalent.account.models import TalentUser
+from FindTalent.account.models import TalentGroup
+
 import hashlib
 
 password = hashlib.sha1( 'demo' ).hexdigest()
@@ -21,3 +23,7 @@ TalentUser( \
 TalentUser( \
   username = 'q1w2e3r4', \
   password = password ).save()
+
+TalentGroup( \
+  username  = 'demo', \
+  groupname = 'basic' ).save()
