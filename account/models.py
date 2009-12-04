@@ -18,3 +18,19 @@ class TalentGroup( models.Model ):
 
   def __unicode__( self ):
     return '[Username: %s, Groupname: %s]' % ( self.username, self.groupname )
+
+class GroupManager:
+  @staticmethod
+  def add_user_to_group( user, group ):
+    TalentGroup( username = user, groupname = group ).save()
+
+  def del_user_from_group( user, group ):
+    TalentGroup.objects.filter( \
+      username__exact  = user, \
+      groupname__exact = group ).delete()
+
+  @staticmethod
+  def is_user_in_group( user, group ):
+    return TalentGroup.objects.filter( \
+      username__exact  = user, \
+      groupname__exact = group )[:1]

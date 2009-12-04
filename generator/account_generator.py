@@ -1,5 +1,5 @@
 from FindTalent.account.models import TalentUser
-from FindTalent.account.models import TalentGroup
+from FindTalent.account.models import TalentGroup, GroupManager
 
 import hashlib
 
@@ -27,3 +27,5 @@ TalentUser( \
 TalentGroup( \
   username  = 'demo', \
   groupname = 'basic' ).save()
+
+GroupManager.add_user_to_group( 'demo', 'basic2' )
