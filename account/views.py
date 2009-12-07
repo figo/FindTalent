@@ -6,8 +6,8 @@ import hashlib
 from FindTalent.common.models  import TalentHelper, SessionManager
 from FindTalent.account.models import TalentUser
 
-def login( request ):
-  return render_to_response( 'account/login.htm' );
+def index( request ):
+  return render_to_response( 'account/index.htm' );
 
 def signin( request):
   checker = TalentHelper.get_empty_val_checker( request.POST )
