@@ -2,7 +2,7 @@
 
 {% block head_css %}
   #container { margin: 0 auto; text-align: center; font-size: 12px; }
-  form { margin: 15px auto; text-align: left; padding: 15px; width: 80%; border: 1px solid; }
+  #search-container { margin: 15px auto; text-align: left; padding: 15px; width: 80%; border: 1px solid; }
   h1 { font-size: 14px; }
   h1 span { color: red; }
   table { margin: 0 auto; border: 2px solid; width: 100%; border-collapse: collapse; }
@@ -29,13 +29,23 @@ function adjust_search_box()
 $(function(){
   adjust_search_box();
   $( '#search-type' ).bind( 'change', adjust_search_box );
+
+  $( '#search-btn' ).click( function() {
+    url =  '/search/?type=';
+    url += $( '#search-type' ).val();
+    url += '&key=';
+    url += $( '#search-key' ).val();
+
+    window.location.replace( url );
+    } );
 });
 {% endblock %}
 
 {% block content %}
 {% include "header.htm" %}
 <div id="container">
-<form action="#" method="post">
+
+<div id="search-container">
   <select id="search-type" name="search-type">
     <option value="pending" selected="selected">Choose a Search Type...</option>
     <option value="skill">Search Type: Skill</option>
@@ -44,10 +54,10 @@ $(function(){
   </select>
   <div id="search-box">
     <input type="text" id="search-key" name="search-key" maxlength="30"/>
-    <input type="submit" value="Search" id="search-btn" name="search-btn"/>
+    <input type="button" value="Search" id="search-btn" name="search-btn"/>
     <input type="checkbox" id="search-in-result" name="search-in-result"/>Search in the current result
   </div><!-- search-box -->
-</form>
+</div><!-- search-container -->
 
 <h1>Total qualified: <span>3</span></h1>
 
