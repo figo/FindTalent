@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.http      import HttpResponseRedirect
 from django.conf      import settings
 from datetime         import datetime
-import hashlib
+import hashlib, os
 
 from FindTalent.common.models  import TalentHelper, SessionManager
 from FindTalent.account.models import TalentUser
@@ -53,8 +53,13 @@ def signout( request ):
   return HttpResponseRedirect( '/' )
 
 def uploadimg( request ):
-  if request.FILES.has_key( 'Filedata' ):
-    filename = datetime.now().strftime( '%Y%m%d%H%M%S.jpg' )
+  if not request.FILES.has_key( 'Filedata' ):
+    return render_to_response( 'account/upload_img.json', { 'result' : 'FAIL' } )
+
+  ext = os.path.splitext( request.FILES[ 'Filedata' ].name )[ 1 ]
+  if ext in ( '.jpg', '.png', '.gif' ):
+    filename =  datetime.now().strftime( '%Y%m%d%H%M%S' )
+    filename += ext
 
     file = open( settings.UPLOAD_IMG_ROOT + '/' + filename, 'wb+' )
     for chunk in request.FILES[ 'Filedata' ].chunks():
