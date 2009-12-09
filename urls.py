@@ -21,11 +21,12 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns( 'account',
-  ( r'^$',                  'views.index'   ),
-  ( r'^account/$',          'views.index'   ),
-  ( r'^account/sign_in/$',  'views.signin'  ),
-  ( r'^account/sign_up/$',  'views.signup'  ),
-  ( r'^account/sign_out/$', 'views.signout' ),
+  ( r'^$',                    'views.index'     ),
+  ( r'^account/$',            'views.index'     ),
+  ( r'^account/sign_in/$',    'views.signin'    ),
+  ( r'^account/sign_up/$',    'views.signup'    ),
+  ( r'^account/sign_out/$',   'views.signout'   ),
+  ( r'^account/upload_img/$', 'views.uploadimg' ),
 )
 
 urlpatterns += patterns( 'show',

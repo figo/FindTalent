@@ -1,8 +1,10 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.http      import HttpResponseRedirect
-
+from django.conf      import settings
+from datetime         import datetime
 import hashlib
+
 from FindTalent.common.models  import TalentHelper, SessionManager
 from FindTalent.account.models import TalentUser
 
@@ -49,3 +51,17 @@ def signup( request ):
 def signout( request ):
   SessionManager( request.session ).clr_cookie()
   return HttpResponseRedirect( '/' )
+
+def uploadimg( request ):
+  if request.FILES.has_key( 'Filedata' ):
+    filename = datetime.now().strftime( '%Y%m%d%H%M%S.jpg' )
+
+    file = open( settings.UPLOAD_IMG_ROOT + '/' + filename, 'wb+' )
+    for chunk in request.FILES[ 'Filedata' ].chunks():
+      file.write( chunk )
+    file.close()
+
+    return render_to_response( 'account/upload_img.json', \
+      { 'result' : 'PASS', 'filename' : filename } )
+  else:
+    return render_to_response( 'account/upload_img.json', { 'result' : 'FAIL' } )

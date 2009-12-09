@@ -7,8 +7,9 @@
   #tabs { margin: 30px auto; width: 400px; text-align: center; }
   #sign-up-alert, #sign-in-alert { padding: 0 5px; }
   #sign-up-alert p span, #sign-in-alert p span { float: left; }
-  #login-btn, #reg-avatar-btn, #reg-btn { padding: 5px 25px; font-size: 12px; text-decoration: none; position: relative; }
-  #login-btn span, #reg-avatar-btn span, #reg-btn span { position: absolute; left: 5px; top: 5px; }
+  #login-btn, #reg-btn { padding: 5px 25px; font-size: 12px; text-decoration: none; position: relative; }
+  #login-btn span, #reg-btn span { position: absolute; left: 5px; top: 5px; }
+  #reg-avatar-btn-wrapper img { width: 100px; height: 130px; }
 {% endblock %}
 
 {% block head_javascript %}
@@ -17,27 +18,14 @@ function show_error_msg( alertbox, msg )
   alertbox.html( '<p><span class="ui-icon ui-icon-alert"></span>' + msg + '</p>' ).show();
 }
 
+var uploader;
+
 $(function(){
-  $( '#shadow, #sign-up-alert, #sign-in-alert' ).hide();
+  $( '#sign-up-alert, #sign-in-alert' ).hide();
 
   $( '#tabs' ).tabs();
 
-  $( '#upload-image' ).dialog( {
-    autoOpen: false,
-    width: 600,
-    buttons: {
-      'Upload' : function() {
-        $( '#shadow' ).hide();
-        $( this ).dialog( 'close' );
-      },
-      'Cancel' : function() {
-        $( '#shadow' ).hide();
-        $( this ).dialog( 'close' );
-      }
-    }
-  } );
-
-  $( '#login-btn, #reg-btn, #reg-avatar-btn' ).hover(
+  $( '#login-btn, #reg-btn' ).hover(
     function() { $( this ).addClass( 'ui-state-hover' ); },
     function() { $( this ).removeClass( 'ui-state-hover' ); }
   );
@@ -52,11 +40,6 @@ $(function(){
 
     alertbox.hide();
     $( '#login-form' ).submit();
-  } );
-
-  $( '#reg-avatar-btn' ).click( function() {
-    $( '#shadow' ).show();
-    $( '#upload-image' ).dialog( 'open' );
   } );
 
   $( '#reg-btn' ).click( function() {
@@ -76,6 +59,34 @@ $(function(){
     alertbox.hide();
     $( '#reg-form' ).submit();
   } );
+
+  uploader = new SWFUpload( {
+    upload_url : '/account/upload_img/',
+    flash_url  : '/static/js/swfupload.swf',
+
+    file_size_limit : '2 MB',
+    file_upload_limit: 1,
+    file_types : '*.jpg;*.png;*.gif',
+    file_types_description : 'All Images',
+
+    file_dialog_complete_handler : function( number ) {
+      if( number == 1 )
+        uploader.startUpload();
+      },
+    upload_success_handler : function( file, data ) {
+      eval( 'data_obj = (' + data + ')' );
+      if( data_obj.result == 'PASS' )
+        $( '#reg-avatar-btn-wrapper' ).html(
+          '<img src="/static/upload/'
+          + data_obj.filename
+          + '" alt="Avatar" title="Avatar"/>' );
+      },
+
+    button_placeholder_id : 'reg-avatar-btn',
+    button_image_url : '/static/reg-avatar-btn.png',
+    button_width : 61,
+    button_height: 22
+    } );
 });
 {% endblock %}
 
@@ -121,18 +132,11 @@ $(function(){
         </tr>
         <tr>
           <td>Avatar</td>
-          <td><p><a href="#" id="reg-avatar-btn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-newwin"></span>Upload from my computer...</a></p></td>
+          <td id="reg-avatar-btn-wrapper"><span id="reg-avatar-btn"></span></td>
         </tr>
       </table>
       <p><a href="#" id="reg-btn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-pencil"></span>Register</a></p>
     </form>
   </div>
-</div>
-
-<div id="shadow" class="ui-widget-overlay"></div>
-
-<div id="upload-image" title="Uploading avatar...">
-<p>Please choose your avatar:</p>
-<input type="file" accept="image/*"/>
 </div>
 {% endblock %}

@@ -79,6 +79,7 @@ TEMPLATE_DIRS = (
 )
 
 STATIC_DOC_ROOT = base_dir + '/static'
+UPLOAD_IMG_ROOT = STATIC_DOC_ROOT + '/upload'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
