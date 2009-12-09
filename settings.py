@@ -88,4 +88,7 @@ INSTALLED_APPS = (
 # 'django.contrib.sites',
   'django.contrib.sessions',
   'FindTalent.account',
+  'FindTalent.user_profile.certification',
+  'FindTalent.user_profile.skill',
+  'FindTalent.user_profile.project',
 )
