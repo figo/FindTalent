@@ -40,6 +40,9 @@ def signup( request ):
     return HttpResponseRedirect( \
       '/error/?msg=%s' % 'Invalid register data' )
 
+  if TalentUser.objects.filter( username__exact = reg_name )[:1]:
+    return HttpResponseRedirect( \
+      '/error/?msg=%s' % 'Username has been taken' )
   TalentUser( \
     username = reg_name, \
     password = hashlib.sha1( reg_passwd ).hexdigest(), \
