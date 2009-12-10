@@ -9,11 +9,17 @@ def show( request ):
   ident = SessionManager( request.session ).check_cookie()
 
   if len( ident ) == 2:
-    user = TalentUser.objects.filter( username__exact = ident[ 0 ] )[:1].values()
+    if request.GET.has_key( 'name' ) and request.GET[ 'name' ]:
+      username = request.GET[ 'name' ]
+    else:
+      username = ident[ 0 ]
+
+    user = TalentUser.objects.filter( username__exact = username )[:1].values()
     if len( user ) == 1:
       user = user[ 0 ]
-      return render_to_response( 'show/index.htm', { 'username' : user['username'], 'title' : user['title'], 'team' : user['team'] } )
+      return render_to_response( 'show/index.htm', { 'username' : ident[ 0 ], 'showuser' : user[ 'username' ], 'title' : user[ 'title' ], 'team' : user[ 'team' ] } )
     else:
-      return HttpResponseRedirect( '/error/?msg=Invalid cookie' )
+      return HttpResponseRedirect( \
+        '/error/?msg=Cannot find user: [%s]' % username )
   else:
     return HttpResponseRedirect( '/' )
