@@ -1,9 +1,10 @@
 from django.db import models
+from FindTalent.account.models import TalentUser
 
 # Create your models here.
 
 class Project( models.Model ):
-  username       = models.CharField( max_length = 20 )
+  username       = models.ForeignKey( TalentUser )
   description    = models.CharField( max_length = 200 )
   start_time     = models.DateTimeField( )
   end_time       = models.DateTimeField( )
@@ -14,22 +15,22 @@ class Project( models.Model ):
 
 
   def __unicode__( self ):
-    return '[username: %s, decription: %s, start from: %s, end: %s, tools used: %s, hardware: %s, software: %s, responsibility]' %(self.username, self.description, self.start_time, self.end_time, self.tools,self.hardware_enviro, self.software_enviro, self.reponsibility)
+    return '[ decription: %s, tools used: %s, hardware: %s, software: %s, responsibility:%s]' %(self.description,self.tools,self.hardware, self.software, self.respon)
 
 
 class ProjectManager:
   @staticmethod
   def find_project_by_user( user ):
-    return Project.objects.filter( username = user )
+    return Project.objects.filter( username = TalentUser.objects.get(username=user) )
 
   
   @staticmethod
   def store_project_by_user(user, description, start, end, tools, hardware, software, respon ):
     Project.objects.filter( \
-       username__exact = user,\
+       username__exact = TalentUser.objects.get(username=user),\
        description__exact = description ).delete()
     Project( \
-      username = user, \
+      username = TalentUser.objects.get(username=user), \
       description = description,\
       start_time =  start,\
       end_time   =  end,\
