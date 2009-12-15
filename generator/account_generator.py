@@ -12,20 +12,34 @@ TalentUser( \
   team     = 'SNAC', \
   picture  = 'http' ).save()
 TalentUser( \
-  username = 'lucy', \
+  username = 'Figo_Luo', \
   password = password, \
-  title    = 'SE', \
+  title    = 'SQA', \
   team     = 'SNAC', \
   picture  = 'http').save()
 TalentUser( \
-  username = 'abcdefghijk', \
-  password = password ).save()
+  username = 'Tao_Wu', \
+  password = password,\
+  title    = 'SQA', \
+  team     = 'SNAC', \
+  picture  = 'http').save()
 TalentUser( \
-  username = 'q1w2e3r4', \
-  password = password ).save()
+  username = 'Feng_Xiao', \
+  password = password,\
+  title    = 'SQA', \
+  team     = 'SNAC', \
+  picture  = 'http').save()
 
 TalentGroup( \
   username  = 'demo', \
   groupname = 'basic' ).save()
-
-GroupManager.add_user_to_group( 'demo', 'basic2' )
+TalentGroup( \
+  username  = 'Figo_luo', \
+  groupname = 'basic' ).save()
+TalentGroup( \
+  username  = 'Tao_Wu', \
+  groupname = 'basic' ).save()
+TalentGroup( \
+  username  = 'Feng_Xiao', \
+  groupname = 'basic' ).save()
+GroupManager.add_user_to_group( 'demo', 'basic' )
