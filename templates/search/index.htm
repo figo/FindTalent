@@ -59,41 +59,27 @@ $(function(){
   </div><!-- search-box -->
 </div><!-- search-container -->
 
-<h1>Total qualified: <span>3</span></h1>
-
+<h1>Total qualified: <span>{{total_qualified}}</span></h1>
 <table class="ui-state-default">
   <tr>
     <th>Name</th>
     <th>Title</th>
     <th>Team</th>
+    <!--
     <th>Skill Count</th>
     <th>Experience Count</th>
     <th>Certification Count</th>
+    -->
   </tr>
+{% if all_search_result %}
+  {% for result in all_search_result %}
   <tr>
-    <td>Tian You</td>
-    <td>Associate Software Engineer</td>
-    <td>SAVFL</td>
-    <td>1</td>
-    <td>1</td>
-    <td>0</td>
+    <td>{{result.username.username}}</td>
+    <td>{{result.username.title}}</td>
+    <td>{{result.username.team}}</td>
   </tr>
-  <tr>
-    <td>Foo Bar</td>
-    <td>Associate Software Engineer</td>
-    <td>SAVFL</td>
-    <td>2</td>
-    <td>2</td>
-    <td>3</td>
-  </tr>
-  <tr>
-    <td>Bar Foo</td>
-    <td>Software Engineer</td>
-    <td>SAVFL</td>
-    <td>10</td>
-    <td>13</td>
-    <td>7</td>
-  </tr>
+  {% endfor %}
+{% endif %}
 </table>
 </div><!-- container -->
 {% endblock %}
