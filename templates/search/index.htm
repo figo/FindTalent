@@ -74,9 +74,9 @@ $(function(){
 {% if all_search_result %}
   {% for result in all_search_result %}
   <tr>
-    <td>{{result.username.username}}</td>
-    <td>{{result.username.title}}</td>
-    <td>{{result.username.team}}</td>
+    <td>{{result.username}}</td>
+    <td>{{result.title}}</td>
+    <td>{{result.team}}</td>
   </tr>
   {% endfor %}
 {% endif %}

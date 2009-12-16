@@ -15,7 +15,7 @@ def search( request ):
  
   checker = TalentHelper.get_empty_val_checker( request.GET )
   if not checker( 'type' ) or not checker ( 'key' ):
-       result = Project.objects.all()
+       result = TalentUser.objects.all()
        return render_to_response( 'search/index.htm', { 'all_search_result' : result, 'total_qualified':len(result) } )
   
   else:
@@ -29,4 +29,8 @@ def search( request ):
        if ( search_type == 'certification' ):
          result = Certification.objects.filter( cert_name__icontains=search_key )
        
-       return render_to_response( 'search/index.htm', { 'all_search_result' : result, 'total_qualified':len(result) } )
+       users = []
+       for re in result:
+         users.append(re.username)
+       
+       return render_to_response( 'search/index.htm', { 'all_search_result' : users, 'total_qualified':len(users) } )
